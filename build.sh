@@ -1,0 +1,1 @@
+gcc -g -o eh-uploader src/main.c src/config/config.c src/req/req.c src/req/reqbuilder.c src/req/res.c src/util/util.c -Ideps -lcurl -lssl

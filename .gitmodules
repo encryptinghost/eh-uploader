@@ -1,0 +1,6 @@
+[submodule "jsmn"]
+	path = jsmn
+	url = https://github.com/zserge/jsmn
+[submodule "deps/jsmn"]
+	path = deps/jsmn
+	url = https://github.com/zserge/jsmn
