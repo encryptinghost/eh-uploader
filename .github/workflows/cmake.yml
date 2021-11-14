@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build CMake
+        uses: ashutoshvarma/action-cmake-build@v1
+        with:
+          build-dir: ${{ runner.workspace }}/build
+          build-type: Release
+          cc: clang
+          target: eh_uploader
+          parallel: 4
+          run-test: false
+          install-build: false
+          submodule-update: false
