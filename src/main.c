@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
         return 1;
     }
-#ifdef _WIN32
+#ifndef __APPLE__
     srand((unsigned int) time(NULL));
 #else
     sranddev();
