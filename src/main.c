@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
-#include <curl/curl.h>
+#ifdef _WIN32
+# include <time.h>
+#endif
 
 #include "config/config.h"
 #include "req/req.h"
@@ -36,8 +37,11 @@ int main(int argc, char **argv) {
         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
         return 1;
     }
-
+#ifdef _WIN32
     srand((unsigned int) time(NULL));
+#else
+    sranddev();
+#endif
 
     char key[15];
     random_string(key, 14);
