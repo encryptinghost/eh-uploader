@@ -4,7 +4,7 @@ This is a command line tool to upload files to encrypting.host on the command li
 
 ## Usage
 
-First, you need to create a config file. For Windows, the path is `%USERPROFILE\.ehconfig.json`. For macOS and Linux, it's `~/.ehconfig.json`. It should look like this:
+First, you need to create a config file. For Windows, the path is `%USERPROFILE%\.ehconfig.json`. For macOS and Linux, it's `~/.ehconfig.json`. It should look like this:
 
 ```json
 {
