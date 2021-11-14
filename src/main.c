@@ -9,24 +9,20 @@
 #include "util/util.h"
 
 int main(int argc, char **argv) {
-    eh_config_t config;
-
-#ifdef _WIN32
-    char *user_home = getenv("USERPROFILE");
-#else
-    char *user_home = getenv("HOME");
+#ifdef _WIN32 // It seems like Windows doesn't handle OpenSSL correctly.
+    curl_global_sslset(CURLSSLBACKEND_SCHANNEL, NULL, NULL);
 #endif
 
-    char *end_part = "/.ehconfig.json";
+    eh_config_t config;
 
-    char *config_path = (char *) malloc(strlen(user_home) + strlen(end_part) + 1);
-
-    sprintf(config_path, "%s%s", user_home, end_part);
+    char *config_path = get_config_path();
 
     eh_error_t err = read_config(config_path, &config);
 
+    free(config_path);
+
     if (err == EH_ERROR_NO_CONFIG) {
-        printf("No config was found. Please create one.\n");
+        fprintf(stderr, "No config was found. Please create one.\n");
 
         return 1;
     }
@@ -36,15 +32,15 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    srand((unsigned int) time(NULL));
-
-    char key[15];
-    random_string(key, 14);
-
     if (argc != 2) {
         fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
         return 1;
     }
+
+    srand((unsigned int) time(NULL));
+
+    char key[15];
+    random_string(key, 14);
 
     eh_req_t req;
     eh_res_t res;

@@ -18,4 +18,6 @@ char *json_strcpy(const char *json, jsmntok_t *tok);
 
 size_t read_entire_file(FILE *file, char **dest);
 
+char *get_config_path();
+
 #endif // EH_UPLOADER_UTIL_H

@@ -2,6 +2,8 @@
 
 #define MAX_TOKENS 32
 
+#include <stdio.h>
+
 static int extract_urls(eh_res_t *res, eh_res_cbdata_t *data) {
     jsmn_parser parser;
     jsmn_init(&parser);
@@ -64,6 +66,7 @@ void eh_upload_file(eh_req_t *req, eh_res_t *res) {
 
     if (status != CURLE_OK) {
         free(cbdata.data);
+        printf("Couldn't perform request: %d\n", status);
 
         return;
     }
@@ -73,6 +76,7 @@ void eh_upload_file(eh_req_t *req, eh_res_t *res) {
 
     if (response_code != 200) {
         free(cbdata.data);
+        printf("Res code %d\n", response_code);
 
         return;
     }

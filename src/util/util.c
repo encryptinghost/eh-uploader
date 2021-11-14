@@ -59,3 +59,19 @@ int is_alphanum(const char *str) {
 
     return 1;
 }
+
+char *get_config_path() {
+    #ifdef _WIN32
+    char *user_home = getenv("USERPROFILE");
+#else
+    char *user_home = getenv("HOME");
+#endif
+
+    char *end_part = "/.ehconfig.json";
+
+    char *config_path = (char *) malloc(strlen(user_home) + strlen(end_part) + 1);
+
+    sprintf(config_path, "%s%s", user_home, end_part);
+
+    return config_path;
+}

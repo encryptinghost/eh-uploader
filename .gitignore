@@ -2,3 +2,5 @@
 *.jpg
 config.json
 eh-uploader
+eh-uploader.exe
+libcurl.dll
